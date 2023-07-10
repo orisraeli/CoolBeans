@@ -15,6 +15,7 @@
 		452F04F02A5C83E100CE946D /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452F04EF2A5C83E100CE946D /* Drink.swift */; };
 		452F04F22A5C84C700CE946D /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452F04F12A5C84C700CE946D /* MenuSection.swift */; };
 		452F04F42A5C850200CE946D /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452F04F32A5C850200CE946D /* Menu.swift */; };
+		452F04F62A5C87AE00CE946D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452F04F52A5C87AE00CE946D /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		452F04EF2A5C83E100CE946D /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		452F04F12A5C84C700CE946D /* MenuSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		452F04F32A5C850200CE946D /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		452F04F52A5C87AE00CE946D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				452F04DF2A5C82E300CE946D /* CoolBeansApp.swift */,
 				452F04E12A5C82E300CE946D /* ContentView.swift */,
+				452F04F52A5C87AE00CE946D /* MenuView.swift */,
 				452F04EF2A5C83E100CE946D /* Drink.swift */,
 				452F04F12A5C84C700CE946D /* MenuSection.swift */,
 				452F04F32A5C850200CE946D /* Menu.swift */,
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				452F04E22A5C82E300CE946D /* ContentView.swift in Sources */,
+				452F04F62A5C87AE00CE946D /* MenuView.swift in Sources */,
 				452F04F02A5C83E100CE946D /* Drink.swift in Sources */,
 				452F04F22A5C84C700CE946D /* MenuSection.swift in Sources */,
 				452F04E02A5C82E300CE946D /* CoolBeansApp.swift in Sources */,
