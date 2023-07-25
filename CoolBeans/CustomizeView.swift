@@ -9,14 +9,18 @@ import SwiftUI
 
 struct CustomizeView: View {
 	let drink: Drink
+	let dismiss: () -> Void
 	
 	@EnvironmentObject var menu: Menu
+	@EnvironmentObject var history: History
 	
 	@State private var size = 0
-	@State private var isDecaff = false
+	@State private var isDecaf = false
 	@State private var extraShots = 0
 	@State private var milk = ConfigurationOption.none
 	@State private var syrup = ConfigurationOption.none
+	
+	@State private var isFirstAppearance = true
 	
 	let sizeOptions = ["Small", "Medium", "Large"]
 	
@@ -24,7 +28,7 @@ struct CustomizeView: View {
 		var caffeineAmount = drink.caffeine[size]
 		caffeineAmount += extraShots * 60
 		
-		if isDecaff {
+		if isDecaf {
 			caffeineAmount /= 20
 		}
 		
@@ -59,7 +63,7 @@ struct CustomizeView: View {
 					Stepper("Extra shots: \(extraShots)", value: $extraShots, in: 0...8)
 				}
 				
-				Toggle("Decaffeinated", isOn: $isDecaff)
+				Toggle("Decaffeinated", isOn: $isDecaf)
 			}
 			
 			Section("Customizations") {
@@ -83,18 +87,34 @@ struct CustomizeView: View {
 			
 			Section("Estimates") {
 				Text("**Caffeine:** \(caffeine) _mg_")
-				Text("**Calories:** \(calories) cal")
+				Text("**Calories:** \(calories) _cal_")
 			}
 		}
 		.navigationBarTitleDisplayMode(.inline)
 		.navigationTitle(drink.name)
+		.toolbar {
+			Button("Save") {
+				history.add(drink, size: sizeOptions[size], extraShots: extraShots, isDecaf: isDecaf, milk: milk, syrup: syrup, caffeine: caffeine, calories: calories)
+				
+				dismiss()
+			}
+		}
+		.onAppear {
+			guard isFirstAppearance else { return }
+			
+			if drink.servedWithMilk {
+				milk = menu.milkOptions[1]
+			}
+			
+			isFirstAppearance = false
+		}
     }
 }
 
 struct CustomizeView_Previews: PreviewProvider {
     static var previews: some View {
 		NavigationStack {
-			CustomizeView(drink: Drink.example)
+			CustomizeView(drink: Drink.example) { }
 				.environmentObject(Menu())
 		}
     }
