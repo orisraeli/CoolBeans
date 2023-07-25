@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Serving: Codable, Identifiable {
+struct Serving: Codable, Identifiable, Equatable {
 	var id: UUID
 	let name: String
 	let description: String

@@ -12,6 +12,15 @@ struct ContentView: View {
 	@StateObject var history = History()
 	@State private var presentingAddScreen = false
 	
+	var totalCaffeine: Int {
+		history.servings.map(\.caffeine).reduce(0, +)
+	}
+	
+	var totalCalories: Int {
+		history.servings.map(\.calories).reduce(0, +)
+	}
+	
+	
     var body: some View {
 		NavigationStack {
 			List {
@@ -20,23 +29,48 @@ struct ContentView: View {
 						presentingAddScreen = true
 					}
 				} else {
-					ForEach(history.servings) { serving in
-						HStack {
-							VStack(alignment: .leading) {
-								Text(serving.name)
-									.font(.headline)
+					Section("Summary") {
+						Text("Caffeine: \(totalCaffeine) mg")
+						Text("Calories: \(totalCalories) cal")
+					}
+					
+					Section("History") {
+						ForEach(history.servings) { serving in
+							HStack {
+								VStack(alignment: .leading) {
+									Text(serving.name)
+										.font(.headline)
+									
+									Text(serving.description)
+										.font(.caption)
+								}
 								
-								Text(serving.description)
-									.font(.caption)
+								Spacer()
+								
+								VStack(alignment: .trailing) {
+									Text("\(serving.caffeine) mg")
+									Text("\(serving.calories) cal")
+								}
+								.font(.subheadline)
 							}
-							
-							Spacer()
-							
-							VStack(alignment: .trailing) {
-								Text("\(serving.caffeine) mg")
-								Text("\(serving.calories) cal")
+							.swipeActions {
+								Button(role: .destructive) {
+									withAnimation {
+										history.delete(serving)
+									}
+								} label: {
+									Label("Delete", systemImage: "trash")
+								}
+								
+								Button {
+									withAnimation {
+										history.reorder(serving)
+									}
+								} label: {
+									Label("Repeat", systemImage: "repeat")
+								}
+								.tint(.blue)
 							}
-							.font(.subheadline)
 						}
 					}
 				}
